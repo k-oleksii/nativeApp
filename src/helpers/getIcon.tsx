@@ -1,3 +1,4 @@
+import React from 'react';
 import { cloneElement } from 'react';
 
 // Get icons from a set and return as a component

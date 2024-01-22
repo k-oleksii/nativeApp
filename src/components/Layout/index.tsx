@@ -2,7 +2,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { FC, ReactNode } from 'react';
 import { StyleSheet } from 'react-native';
 import { EnumColors } from 'app/types';
-
 interface Props {
   children?: ReactNode;
 }
