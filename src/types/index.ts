@@ -20,6 +20,7 @@ export interface IIcons {
 
 export interface ICard {
   id: number | string;
+  isNew: boolean;
   title: string;
   caption: string;
   price: number;

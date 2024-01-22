@@ -6,13 +6,14 @@ import { FC } from 'react';
 import { IMAGES } from 'app/constants';
 
 export const Card: FC<ICard> = props => {
-  const { title, caption, price, oldPrice, imgName } = props;
+  const { title, caption, price, oldPrice, imgName, isNew } = props;
 
   return (
     <View style={styles.card}>
       <View style={styles.imageContainer}>
         <Pressable style={styles.like}>{getIcon(EnumIcons.like, EnumColors.gray)}</Pressable>
         <Image style={styles.image} source={(IMAGES as any)[imgName]} />
+        {isNew && <Text style={styles.label}>New</Text>}
       </View>
       <View style={styles.info}>
         <Text style={styles.title} numberOfLines={2}>
@@ -51,6 +52,19 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: 104,
     height: 104,
+  },
+  label: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
+    zIndex: 1,
+    paddingVertical: 2,
+    paddingHorizontal: 5,
+    fontSize: 10,
+    fontWeight: '700',
+    color: EnumColors.white,
+    backgroundColor: EnumColors.pink,
+    borderRadius: 5,
   },
   image: {
     flex: 1,
