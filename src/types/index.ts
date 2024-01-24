@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { ImageSourcePropType } from 'react-native';
 
 export enum EnumColors {
   mainBg = '#fcfcfc',
@@ -25,5 +26,5 @@ export interface ICard {
   caption: string;
   price: number;
   oldPrice?: number;
-  imgName: string;
+  img: ImageSourcePropType;
 }
