@@ -1,11 +1,27 @@
-import React from 'react';
-import { FlatList, ListRenderItem, StyleSheet, Text, View } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { FlatList, ListRenderItem, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Card } from 'app/components/Card';
 
 import { data } from 'app/mock-data/data.ts';
 import { ICard } from 'app/types';
 
+const sortAndFilterProducts = (search: string) => {
+  return [...data].filter(product => {
+    const productTitle = product.title.toLowerCase();
+
+    return productTitle.includes(search.toLowerCase());
+  });
+};
+
 export const Home = () => {
+  const [search, setSearch] = useState('');
+
+  const products = useMemo(() => sortAndFilterProducts(search), [search]);
+
+  const handleSearch = (text: string) => {
+    setSearch(text);
+  };
+
   const renderCard: ListRenderItem<ICard> = ({ item }) => {
     return (
       <View style={styles.item}>
@@ -19,8 +35,11 @@ export const Home = () => {
       <View>
         <Text>Welcome!</Text>
       </View>
+      <View>
+        <TextInput onChangeText={handleSearch} placeholder="Search" />
+      </View>
       <View style={styles.cards}>
-        <FlatList data={data} renderItem={renderCard} keyExtractor={({ id }: { id: string }) => id} />
+        <FlatList data={products} renderItem={renderCard} keyExtractor={({ id }: { id: string }) => id} />
       </View>
       <Text>Footer</Text>
     </View>
