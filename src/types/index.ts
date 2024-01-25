@@ -13,6 +13,10 @@ export enum EnumColors {
 export enum EnumIcons {
   bag = 'bag',
   like = 'like',
+  logo = 'logo',
+  search = 'search',
+  filter = 'filter',
+  close = 'close',
 }
 
 export interface IIcons {

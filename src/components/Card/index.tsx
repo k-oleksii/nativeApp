@@ -6,7 +6,6 @@ import { FC } from 'react';
 
 export const Card: FC<ICard> = props => {
   const { title, caption, price, oldPrice, img, isNew } = props;
-
   return (
     <View style={styles.card}>
       <View style={styles.imageContainer}>
@@ -132,8 +131,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 36,
-    height: 36,
+    width: 30,
+    height: 30,
     backgroundColor: EnumColors.blue,
     borderRadius: 100,
   },
