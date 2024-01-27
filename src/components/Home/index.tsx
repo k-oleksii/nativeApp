@@ -1,25 +1,14 @@
-import React, { useMemo, useState } from 'react';
-import { FlatList, ListRenderItem, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { Card } from 'app/components/Card';
-
-import { data } from 'app/mock-data/data.ts';
-import { EnumColors, EnumIcons, ICard } from 'app/types';
-import { getIcon } from 'app/helpers/getIcon.tsx';
-import { Modal } from 'app/elements/Modal';
+import React, { useState } from 'react';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { FlatList, ListRenderItem, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Card } from 'app/components/Card';
+import { ButtonText, ButtonIcon, Modal } from 'app/elements';
 
-const sortAndFilterProducts = (search: string, option?: boolean) => {
-  return [...data].filter(product => {
-    const productTitle = product.title.toLowerCase();
-    const result = productTitle.includes(search.toLowerCase());
+import { EnumColors, EnumIcons, ICard } from 'app/types';
 
-    if (option) {
-      return result && product.isNew;
-    }
+import { getIcon } from 'app/helpers/getIcon.tsx';
 
-    return result;
-  });
-};
+import { useSortAndFilterProducts } from 'app/hooks';
 
 export const Home = () => {
   const [search, setSearch] = useState('');
@@ -28,7 +17,7 @@ export const Home = () => {
   const [isFilterModal, setFilterModal] = useState(false);
   const [isFilterNewOption, setFilterNewOption] = useState(false);
 
-  const products = useMemo(() => sortAndFilterProducts(search, isFilterNewOption), [search, isFilterNewOption]);
+  const products = useSortAndFilterProducts(search, isFilterNewOption);
 
   const handleSearch = (text: string) => {
     setSearch(text);
@@ -59,12 +48,8 @@ export const Home = () => {
       <View style={styles.header}>
         {getIcon(EnumIcons.logo)}
         <View style={styles.headerServices}>
-          <Pressable style={styles.headerBtn} onPress={toggleWishlist}>
-            {getIcon(EnumIcons.like, EnumColors.white)}
-          </Pressable>
-          <Pressable style={styles.headerBtn} onPress={toggleSearch}>
-            {getIcon(EnumIcons.search, EnumColors.white)}
-          </Pressable>
+          <ButtonIcon iconName="like" onPress={toggleWishlist} />
+          <ButtonIcon iconName="search" onPress={toggleSearch} />
         </View>
       </View>
 
@@ -108,10 +93,7 @@ export const Home = () => {
       )}
 
       <View style={styles.filter}>
-        <Pressable onPress={toggleFilter} style={styles.filterBtn}>
-          {getIcon(EnumIcons.filter, EnumColors.gray)}
-          <Text style={styles.filterText}>Filter</Text>
-        </Pressable>
+        <ButtonText text="Filter" iconName="filter" onPress={toggleFilter} />
       </View>
 
       <FlatList
@@ -146,15 +128,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
   },
-  headerBtn: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 28,
-    height: 28,
-    backgroundColor: EnumColors.blue,
-    borderRadius: 6,
-  },
   search: {
     position: 'relative',
     paddingHorizontal: 14,
@@ -176,17 +149,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignSelf: 'flex-end',
     paddingHorizontal: 14,
-  },
-  filterBtn: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    paddingVertical: 5,
-  },
-  filterText: {
-    fontSize: 16,
-    fontWeight: '500',
   },
   cards: {
     flex: 1,

@@ -8,6 +8,7 @@ export enum EnumColors {
   gray = '#4f5663',
   pink = '#fa5d5d',
   blue = '#54a5da',
+  darkBlue = '#2892d7',
 }
 
 export enum EnumIcons {

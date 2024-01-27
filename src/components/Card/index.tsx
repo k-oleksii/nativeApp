@@ -3,9 +3,14 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { getIcon } from 'app/helpers/getIcon.tsx';
 import { EnumColors, EnumIcons, ICard } from 'app/types';
 import { FC } from 'react';
+import { ButtonIcon } from 'app/elements';
 
 export const Card: FC<ICard> = props => {
   const { title, caption, price, oldPrice, img, isNew } = props;
+  const onPress = () => {
+    console.log('on press');
+  };
+
   return (
     <View style={styles.card}>
       <View style={styles.imageContainer}>
@@ -24,7 +29,9 @@ export const Card: FC<ICard> = props => {
           <Text style={styles.price}>${price}</Text>
           {oldPrice && <Text style={styles.oldPrice}>${oldPrice}</Text>}
         </View>
-        <Pressable style={styles.buy}>{getIcon(EnumIcons.bag, EnumColors.white)}</Pressable>
+        <View style={styles.cardBtn}>
+          <ButtonIcon iconName="bag" onPress={onPress} circle />
+        </View>
       </View>
     </View>
   );
@@ -124,16 +131,9 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     color: EnumColors.gray,
   },
-  buy: {
+  cardBtn: {
     position: 'absolute',
     right: 10,
     bottom: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 30,
-    height: 30,
-    backgroundColor: EnumColors.blue,
-    borderRadius: 100,
   },
 });
