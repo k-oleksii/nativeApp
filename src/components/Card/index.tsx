@@ -3,16 +3,19 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { getIcon } from 'app/helpers/getIcon.tsx';
 import { EnumColors, EnumIcons, ICard } from 'app/types';
 import { FC } from 'react';
-import { IMAGES } from 'app/constants';
+import { ButtonIcon } from 'app/elements';
 
 export const Card: FC<ICard> = props => {
-  const { title, caption, price, oldPrice, imgName, isNew } = props;
+  const { title, caption, price, oldPrice, img, isNew } = props;
+  const onPress = () => {
+    console.log('on press');
+  };
 
   return (
     <View style={styles.card}>
       <View style={styles.imageContainer}>
         <Pressable style={styles.like}>{getIcon(EnumIcons.like, EnumColors.gray)}</Pressable>
-        <Image style={styles.image} source={(IMAGES as any)[imgName]} />
+        <Image style={styles.image} source={img} />
         {isNew && <Text style={styles.label}>New</Text>}
       </View>
       <View style={styles.info}>
@@ -26,7 +29,9 @@ export const Card: FC<ICard> = props => {
           <Text style={styles.price}>${price}</Text>
           {oldPrice && <Text style={styles.oldPrice}>${oldPrice}</Text>}
         </View>
-        <Pressable style={styles.buy}>{getIcon(EnumIcons.bag, EnumColors.white)}</Pressable>
+        <View style={styles.cardBtn}>
+          <ButtonIcon iconName="bag" onPress={onPress} circle />
+        </View>
       </View>
     </View>
   );
@@ -43,9 +48,9 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.1,
     shadowRadius: 5.46,
-    elevation: 9,
+    elevation: 4,
     overflow: 'hidden',
   },
   imageContainer: {
@@ -68,6 +73,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    width: '100%',
     height: '100%',
     resizeMode: 'cover',
   },
@@ -125,16 +131,9 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     color: EnumColors.gray,
   },
-  buy: {
+  cardBtn: {
     position: 'absolute',
     right: 10,
     bottom: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 36,
-    height: 36,
-    backgroundColor: EnumColors.blue,
-    borderRadius: 100,
   },
 });
