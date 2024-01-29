@@ -10,3 +10,11 @@ export const IMAGES = {
   winterCoat: require('../../assets/fern_water_resistant_parka_mens_ecom_.webp'),
   graphicTshirt: require('../../assets/men-s-white-oversized-t-1.webp'),
 };
+
+export const IMAGES_POPULAR = [
+  { img: require('../../assets/cotton-stretch-cargo-trousers.webp'), name: 'Cotton Stretch Cargo Trousers' },
+  { img: require('../../assets/long-sleeve-oxford-shirt.webp'), name: 'Long Sleeve Oxford Shirt' },
+  { img: require('../../assets/neck-sweatshirt.webp'), name: 'Neck Sweatshirt' },
+  { img: require('../../assets/through-hoodie.webp'), name: 'Through Hoodie' },
+  { img: require('../../assets/wool-blend-cardigan.jpg'), name: 'Wool Blend Cardigan' },
+];

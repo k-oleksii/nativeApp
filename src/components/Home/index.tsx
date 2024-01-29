@@ -9,7 +9,14 @@ import { EnumColors, EnumIcons, ICard } from 'app/types';
 import { getIcon } from 'app/helpers/getIcon.tsx';
 
 import { useSortAndFilterProducts } from 'app/hooks';
-
+import { Popular } from 'app/components/Popular';
+const renderCard: ListRenderItem<ICard> = ({ item }) => {
+  return (
+    <View style={styles.item}>
+      <Card {...item} />
+    </View>
+  );
+};
 export const Home = () => {
   const [search, setSearch] = useState('');
   const [isSearchVisible, setSearchVisible] = useState(false);
@@ -35,14 +42,6 @@ export const Home = () => {
     setFilterModal(!isFilterModal);
   };
 
-  const renderCard: ListRenderItem<ICard> = ({ item }) => {
-    return (
-      <View style={styles.item}>
-        <Card {...item} />
-      </View>
-    );
-  };
-
   return (
     <View style={styles.content}>
       <View style={styles.header}>
@@ -65,6 +64,17 @@ export const Home = () => {
         </View>
       )}
 
+      <Popular />
+
+      <View style={styles.filter}>
+        <ButtonText text="Filter" iconName="filter" onPress={toggleFilter} />
+      </View>
+      <FlatList
+        style={styles.cards}
+        data={products}
+        renderItem={renderCard}
+        keyExtractor={({ id }: { id: string }) => id}
+      />
       {isWishlistModal && (
         <Modal modalVisible={isWishlistModal} toggleModal={toggleWishlist}>
           <Text>
@@ -91,17 +101,6 @@ export const Home = () => {
           />
         </Modal>
       )}
-
-      <View style={styles.filter}>
-        <ButtonText text="Filter" iconName="filter" onPress={toggleFilter} />
-      </View>
-
-      <FlatList
-        style={styles.cards}
-        data={products}
-        renderItem={renderCard}
-        keyExtractor={({ id }: { id: string }) => id}
-      />
 
       <Text>Footer</Text>
     </View>
