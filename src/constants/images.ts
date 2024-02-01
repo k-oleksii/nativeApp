@@ -12,9 +12,33 @@ export const IMAGES = {
 };
 
 export const IMAGES_POPULAR = [
-  { img: require('../../assets/cotton-stretch-cargo-trousers.webp'), name: 'Cotton Stretch Cargo Trousers' },
-  { img: require('../../assets/long-sleeve-oxford-shirt.webp'), name: 'Long Sleeve Oxford Shirt' },
-  { img: require('../../assets/neck-sweatshirt.webp'), name: 'Neck Sweatshirt' },
-  { img: require('../../assets/through-hoodie.webp'), name: 'Through Hoodie' },
-  { img: require('../../assets/wool-blend-cardigan.jpg'), name: 'Wool Blend Cardigan' },
+  {
+    img: require('../../assets/cotton-stretch-cargo-trousers.webp'),
+    name: 'Cotton Stretch Cargo Trousers',
+    link: 'https://www.google.com/',
+  },
+  {
+    img: require('../../assets/long-sleeve-oxford-shirt.webp'),
+    name: 'Long Sleeve Oxford Shirt',
+    link: 'https://reactnative.dev/docs/share',
+  },
+  {
+    img: require('../../assets/neck-sweatshirt.webp'),
+    name: 'Neck Sweatshirt',
+    link: 'https://reactnative.dev/docs/flatlist',
+  },
+  { img: require('../../assets/through-hoodie.webp'), name: 'Through Hoodie', link: 'https://reactnative.dev' },
+  {
+    img: require('../../assets/wool-blend-cardigan.jpg'),
+    name: 'Wool Blend Cardigan',
+    link: 'https://www.google.com/',
+  },
+];
+
+export const NEW_POPULAR_ITEM = [
+  {
+    img: require('../../assets/cotton-stretch-cargo-trousers.webp'),
+    name: 'New Cotton Stretch Cargo Trousers',
+    link: 'https://www.youtube.com/',
+  },
 ];

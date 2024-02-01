@@ -33,3 +33,13 @@ export interface ICard {
   oldPrice?: number;
   img: ImageSourcePropType;
 }
+
+export interface IPopular {
+  img: ImageSourcePropType;
+  name: string;
+  link: string;
+}
+
+export interface IPopulars {
+  data: IPopular[];
+}
