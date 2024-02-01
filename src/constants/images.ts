@@ -11,34 +11,76 @@ export const IMAGES = {
   graphicTshirt: require('../../assets/men-s-white-oversized-t-1.webp'),
 };
 
-export const IMAGES_POPULAR = [
+export const POPULAR_PRODUCTS = [
   {
-    img: require('../../assets/cotton-stretch-cargo-trousers.webp'),
-    name: 'Cotton Stretch Cargo Trousers',
+    img: require('../../assets/popular/denim-bomber-jacket.webp'),
+    name: 'Denim Bomber Jacket',
     link: 'https://www.google.com/',
   },
   {
-    img: require('../../assets/long-sleeve-oxford-shirt.webp'),
-    name: 'Long Sleeve Oxford Shirt',
+    img: require('../../assets/popular/cropped-plaid-jacket.webp'),
+    name: 'Cropped Plaid Jacket',
     link: 'https://reactnative.dev/docs/share',
   },
   {
-    img: require('../../assets/neck-sweatshirt.webp'),
-    name: 'Neck Sweatshirt',
+    img: require('../../assets/popular/bouclé-textured-jacket.webp'),
+    name: 'Bouclé Textured Jacket',
     link: 'https://reactnative.dev/docs/flatlist',
   },
-  { img: require('../../assets/through-hoodie.webp'), name: 'Through Hoodie', link: 'https://reactnative.dev' },
   {
-    img: require('../../assets/wool-blend-cardigan.jpg'),
-    name: 'Wool Blend Cardigan',
+    img: require('../../assets/popular/long-blend-wool-coat.webp'),
+    name: 'Long Blend Wool Coat',
+    link: 'https://reactnative.dev',
+  },
+  {
+    img: require('../../assets/popular/mixed-collar-waxed-jacket.webp'),
+    name: 'Mixed collar waxed jacket',
+    link: 'https://www.google.com/',
+  },
+  {
+    img: require('../../assets/popular/striped-cotton-blend-shirt.webp'),
+    name: 'Striped Cotton Blend Shirt',
+    link: 'https://reactnative.dev',
+  },
+  {
+    img: require('../../assets/popular/textured-knit-polo-shirt.webp'),
+    name: 'Textured Knit Polo Shirt',
+    link: 'https://www.google.com/',
+  },
+  {
+    img: require('../../assets/popular/textured-pocket-coat.webp'),
+    name: 'Textured Pocket Coat',
+    link: 'https://www.google.com/',
+  },
+  {
+    img: require('../../assets/popular/textured-shirt.webp'),
+    name: 'Textured Shirt',
     link: 'https://www.google.com/',
   },
 ];
 
-export const NEW_POPULAR_ITEM = [
+export const NEW_POPULAR_PRODUCTS = [
   {
-    img: require('../../assets/cotton-stretch-cargo-trousers.webp'),
-    name: 'New Cotton Stretch Cargo Trousers',
+    img: require('../../assets/popular/plaid-shirt.webp'),
+    name: 'Plaid Shirt',
+    link: 'https://www.google.com/',
+  },
+  {
+    img: require('../../assets/popular/polo-sweatshirt.webp'),
+    name: 'Polo Sweatshirt',
+    link: 'https://reactnative.dev/docs/share',
+  },
+  {
+    img: require('../../assets/popular/stretch-coat.webp'),
+    name: 'Stretch Coat',
+    link: 'https://reactnative.dev/docs/flatlist',
+  },
+];
+
+export const POPULAR_PRODUCT = [
+  {
+    img: require('../../assets/popular/oversized-cotton-trench.webp'),
+    name: 'Oversized Cotton Trench',
     link: 'https://www.youtube.com/',
   },
 ];

@@ -10,6 +10,7 @@ import { getIcon } from 'app/helpers/getIcon.tsx';
 
 import { useSortAndFilterProducts } from 'app/hooks';
 import { Popular } from 'app/components/Popular';
+
 const renderCard: ListRenderItem<ICard> = ({ item }) => {
   return (
     <View style={styles.item}>
@@ -17,6 +18,7 @@ const renderCard: ListRenderItem<ICard> = ({ item }) => {
     </View>
   );
 };
+
 export const Home = () => {
   const [search, setSearch] = useState('');
   const [isSearchVisible, setSearchVisible] = useState(false);
@@ -69,12 +71,8 @@ export const Home = () => {
       <View style={styles.filter}>
         <ButtonText text="Filter" iconName="filter" onPress={toggleFilter} />
       </View>
-      <FlatList
-        style={styles.cards}
-        data={products}
-        renderItem={renderCard}
-        keyExtractor={({ id }: { id: string }) => id}
-      />
+      <FlatList style={styles.cards} data={products} renderItem={renderCard} />
+
       {isWishlistModal && (
         <Modal modalVisible={isWishlistModal} toggleModal={toggleWishlist}>
           <Text>
@@ -149,13 +147,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     paddingHorizontal: 14,
   },
-  cards: {
-    flex: 1,
-  },
-  item: {
-    paddingHorizontal: 14,
-    marginVertical: 10,
-  },
+
   filterTitle: {
     marginBottom: 10,
     fontSize: 18,
@@ -170,5 +162,13 @@ const styles = StyleSheet.create({
   },
   checkboxText: {
     textDecorationLine: 'none',
+  },
+  cards: {
+    flex: 1,
+  },
+
+  item: {
+    paddingHorizontal: 14,
+    marginVertical: 10,
   },
 });

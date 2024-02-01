@@ -12,7 +12,7 @@ import {
   View,
   ViewToken,
 } from 'react-native';
-import { IMAGES_POPULAR, NEW_POPULAR_ITEM } from 'app/constants';
+import { POPULAR_PRODUCT, NEW_POPULAR_PRODUCTS } from 'app/constants';
 import { EnumColors } from 'app/types';
 
 import { useLoadPopularProducts } from 'app/hooks';
@@ -79,15 +79,15 @@ export const Popular = () => {
     }, 5000);
 
     return () => clearInterval(autoScrollInterval);
-  }, [visibleIndex]);
+  }, [visibleIndex, popularProducts.length]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
-      dispatch(createPopular(NEW_POPULAR_ITEM));
+      dispatch(createPopular(POPULAR_PRODUCT));
     }, 3000);
-  }, []);
+  }, [dispatch]);
 
   return (
     <View style={styles.popular}>
@@ -100,7 +100,7 @@ export const Popular = () => {
           pagingEnabled
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           data={popularProducts}
-          onEndReached={() => dispatch(createPopular(IMAGES_POPULAR))}
+          onEndReached={() => dispatch(createPopular(NEW_POPULAR_PRODUCTS))}
           renderItem={renderItem}
           onViewableItemsChanged={onViewableItemsChanged}
         />
@@ -132,13 +132,13 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   list: {
-    width: 330,
+    width: 360,
     overflow: 'hidden',
   },
 
   item: {
-    width: 300,
-    height: 400,
+    width: 330,
+    height: 330,
     marginHorizontal: 15,
     borderRadius: 10,
     overflow: 'hidden',
