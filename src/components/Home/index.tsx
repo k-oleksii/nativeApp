@@ -9,6 +9,15 @@ import { EnumColors, EnumIcons, ICard } from 'app/types';
 import { getIcon } from 'app/helpers/getIcon.tsx';
 
 import { useSortAndFilterProducts } from 'app/hooks';
+import { Popular } from 'app/components/Popular';
+
+const renderCard: ListRenderItem<ICard> = ({ item }) => {
+  return (
+    <View style={styles.item}>
+      <Card {...item} />
+    </View>
+  );
+};
 
 export const Home = () => {
   const [search, setSearch] = useState('');
@@ -35,14 +44,6 @@ export const Home = () => {
     setFilterModal(!isFilterModal);
   };
 
-  const renderCard: ListRenderItem<ICard> = ({ item }) => {
-    return (
-      <View style={styles.item}>
-        <Card {...item} />
-      </View>
-    );
-  };
-
   return (
     <View style={styles.content}>
       <View style={styles.header}>
@@ -64,6 +65,13 @@ export const Home = () => {
           <View style={styles.searchIcon}>{getIcon(EnumIcons.search, EnumColors.gray)}</View>
         </View>
       )}
+
+      <Popular />
+
+      <View style={styles.filter}>
+        <ButtonText text="Filter" iconName="filter" onPress={toggleFilter} />
+      </View>
+      <FlatList style={styles.cards} data={products} renderItem={renderCard} />
 
       {isWishlistModal && (
         <Modal modalVisible={isWishlistModal} toggleModal={toggleWishlist}>
@@ -91,17 +99,6 @@ export const Home = () => {
           />
         </Modal>
       )}
-
-      <View style={styles.filter}>
-        <ButtonText text="Filter" iconName="filter" onPress={toggleFilter} />
-      </View>
-
-      <FlatList
-        style={styles.cards}
-        data={products}
-        renderItem={renderCard}
-        keyExtractor={({ id }: { id: string }) => id}
-      />
 
       <Text>Footer</Text>
     </View>
@@ -150,13 +147,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     paddingHorizontal: 14,
   },
-  cards: {
-    flex: 1,
-  },
-  item: {
-    paddingHorizontal: 14,
-    marginVertical: 10,
-  },
+
   filterTitle: {
     marginBottom: 10,
     fontSize: 18,
@@ -171,5 +162,13 @@ const styles = StyleSheet.create({
   },
   checkboxText: {
     textDecorationLine: 'none',
+  },
+  cards: {
+    flex: 1,
+  },
+
+  item: {
+    paddingHorizontal: 14,
+    marginVertical: 10,
   },
 });
