@@ -12,12 +12,9 @@ import {
   View,
   ViewToken,
 } from 'react-native';
-import { POPULAR_PRODUCT, NEW_POPULAR_PRODUCTS } from 'app/constants';
 import { EnumColors } from 'app/types';
 
 import { useLoadPopularProducts } from 'app/hooks';
-import { useDispatch } from 'react-redux';
-import { createPopular } from 'app/lib/redux/slice';
 
 interface IPopular {
   img: ImageSourcePropType;
@@ -53,7 +50,6 @@ export const Popular = () => {
   const [visibleIndex, setVisibleIndex] = useState<number | null>(null);
   const [refreshing, setRefreshing] = React.useState(false);
   const popularProducts = useLoadPopularProducts();
-  const dispatch = useDispatch();
 
   const onViewableItemsChanged = useCallback(({ viewableItems }: { viewableItems: ViewToken[] }) => {
     if (viewableItems.length > 0) {
@@ -76,7 +72,7 @@ export const Popular = () => {
 
       const newIndex = visibleIndex === popularProducts.length - 1 ? 0 : visibleIndex + 1;
       scrollTo(newIndex);
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(autoScrollInterval);
   }, [visibleIndex, popularProducts.length]);
@@ -85,9 +81,8 @@ export const Popular = () => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
-      dispatch(createPopular(POPULAR_PRODUCT));
     }, 3000);
-  }, [dispatch]);
+  }, []);
 
   return (
     <View style={styles.popular}>
@@ -100,7 +95,6 @@ export const Popular = () => {
           pagingEnabled
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           data={popularProducts}
-          onEndReached={() => dispatch(createPopular(NEW_POPULAR_PRODUCTS))}
           renderItem={renderItem}
           onViewableItemsChanged={onViewableItemsChanged}
         />
