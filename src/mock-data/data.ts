@@ -9,6 +9,7 @@ export const data = [
     price: 35.97,
     oldPrice: 40,
     img: IMAGES.pullover,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: '02',
@@ -17,6 +18,7 @@ export const data = [
     title: 'Slim Fit Oxford Button-Down Shirt',
     price: 59.99,
     img: IMAGES.casualShirt,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: '04',
@@ -26,6 +28,7 @@ export const data = [
     price: 74.95,
     oldPrice: 89.99,
     img: IMAGES.hoodedJacket,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: '03',
@@ -35,6 +38,7 @@ export const data = [
     price: 59.99,
     oldPrice: 69.99,
     img: IMAGES.denimJeans,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: '05',
@@ -43,6 +47,7 @@ export const data = [
     title: 'Classic Brogue Oxford',
     price: 119.99,
     img: IMAGES.leatherShoes,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: '06',
@@ -52,6 +57,7 @@ export const data = [
     price: 29.99,
     oldPrice: 34.99,
     img: IMAGES.sportShorts,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: '07',
@@ -61,6 +67,7 @@ export const data = [
     price: 39.99,
     oldPrice: 44.99,
     img: IMAGES.poloShirt,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: '08',
@@ -69,6 +76,7 @@ export const data = [
     title: 'Insulated Parka with Faux Fur Hood',
     price: 149.99,
     img: IMAGES.winterCoat,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: '09',
@@ -78,6 +86,7 @@ export const data = [
     price: 45.99,
     oldPrice: 49.99,
     img: IMAGES.trackPants,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: '10',
@@ -87,5 +96,6 @@ export const data = [
     price: 24.99,
     oldPrice: 29.99,
     img: IMAGES.graphicTshirt,
+    info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
 ];

@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout } from 'app/components/Layout';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Animated, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { EnumColors } from 'app/types';
 import { BlurView } from '@react-native-community/blur';
 
 // @ts-ignore
 export const IntroScreen = ({ navigation }) => {
+  const [scaleValue] = useState(new Animated.Value(1));
+
+  const handlePressIn = () => {
+    Animated.spring(scaleValue, {
+      toValue: 0.8,
+      useNativeDriver: true,
+    }).start();
+
+    setTimeout(() => {
+      navigation.navigate('Main');
+    }, 100);
+  };
+
+  const animatedStyle = {
+    transform: [{ scale: scaleValue }],
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scaleValue, {
+      toValue: 1,
+      friction: 1,
+      tension: 40,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <Layout>
       <View style={styles.intro}>
@@ -14,12 +40,14 @@ export const IntroScreen = ({ navigation }) => {
           <Text style={styles.introInfoTitle}>Your style tell about you</Text>
           <Text style={styles.introInfoText}>There are many clothes with designs that are suitable for you today</Text>
         </View>
+
         <View style={styles.introBarContainer}>
-          <BlurView blurType="light" blurAmount={6} style={styles.introBar}>
-            <Pressable style={styles.introBtn} onPress={() => navigation.navigate('Home')}>
+          <BlurView blurType="light" blurAmount={4} overlayColor="transparent" style={styles.introBar} />
+          <Animated.View style={animatedStyle}>
+            <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut} style={styles.introBtn}>
               <Text style={styles.introBtnText}>Go To Home</Text>
             </Pressable>
-          </BlurView>
+          </Animated.View>
         </View>
       </View>
     </Layout>
@@ -67,6 +95,10 @@ const styles = StyleSheet.create({
 
   introBarContainer: {
     position: 'relative',
+
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
     height: 115,
     borderTopRightRadius: 40,
@@ -76,23 +108,19 @@ const styles = StyleSheet.create({
 
   introBar: {
     position: 'absolute',
-    zIndex: 1,
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, .3)',
   },
 
   introBtn: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 30,
-    paddingVertical: 10,
+    width: 150,
+    height: 50,
+    paddingHorizontal: 10,
     backgroundColor: EnumColors.white,
     borderRadius: 10,
   },
@@ -100,6 +128,7 @@ const styles = StyleSheet.create({
   introBtnText: {
     fontFamily: 'Inter-Bold',
     fontSize: 18,
+    lineHeight: 18,
     color: EnumColors.black,
   },
 });
