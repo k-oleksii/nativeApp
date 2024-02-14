@@ -9,7 +9,7 @@ import { EnumColors, EnumIcons, ICard } from 'app/types';
 import { getIcon } from 'app/helpers/getIcon.tsx';
 
 import { useSortAndFilterProducts } from 'app/hooks';
-import { Popular } from 'app/components/Popular';
+import { useNavigation } from '@react-navigation/native';
 
 const renderCard: ListRenderItem<ICard> = ({ item }) => {
   return (
@@ -22,10 +22,10 @@ const renderCard: ListRenderItem<ICard> = ({ item }) => {
 export const Home = () => {
   const [search, setSearch] = useState('');
   const [isSearchVisible, setSearchVisible] = useState(false);
-  const [isWishlistModal, setWishlistModal] = useState(false);
+  const [isWishlistModal] = useState(false);
   const [isFilterModal, setFilterModal] = useState(false);
   const [isFilterNewOption, setFilterNewOption] = useState(false);
-
+  const navigation = useNavigation();
   const products = useSortAndFilterProducts(search, isFilterNewOption);
 
   const handleSearch = (text: string) => {
@@ -37,7 +37,7 @@ export const Home = () => {
   };
 
   const toggleWishlist = () => {
-    setWishlistModal(!isWishlistModal);
+    navigation.navigate('Popular');
   };
 
   const toggleFilter = () => {
@@ -66,7 +66,7 @@ export const Home = () => {
         </View>
       )}
 
-      <Popular />
+      {/*<Popular />*/}
 
       <View style={styles.filter}>
         <ButtonText text="Filter" iconName="filter" onPress={toggleFilter} />

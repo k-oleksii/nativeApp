@@ -18,6 +18,7 @@ export enum EnumIcons {
   search = 'search',
   filter = 'filter',
   close = 'close',
+  home = 'home',
 }
 
 export interface IIcons {
@@ -32,6 +33,7 @@ export interface ICard {
   price: number;
   oldPrice?: number;
   img: ImageSourcePropType;
+  info?: string;
 }
 
 export interface IPopular {

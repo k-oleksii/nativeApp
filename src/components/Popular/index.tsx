@@ -12,12 +12,11 @@ import {
   View,
   ViewToken,
 } from 'react-native';
-import { POPULAR_PRODUCT, NEW_POPULAR_PRODUCTS } from 'app/constants';
-import { EnumColors } from 'app/types';
+import { EnumColors, EnumIcons } from 'app/types';
 
 import { useLoadPopularProducts } from 'app/hooks';
-import { useDispatch } from 'react-redux';
-import { createPopular } from 'app/lib/redux/slice';
+import { getIcon } from 'app/helpers/getIcon.tsx';
+import { useNavigation } from '@react-navigation/native';
 
 interface IPopular {
   img: ImageSourcePropType;
@@ -53,7 +52,7 @@ export const Popular = () => {
   const [visibleIndex, setVisibleIndex] = useState<number | null>(null);
   const [refreshing, setRefreshing] = React.useState(false);
   const popularProducts = useLoadPopularProducts();
-  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const onViewableItemsChanged = useCallback(({ viewableItems }: { viewableItems: ViewToken[] }) => {
     if (viewableItems.length > 0) {
@@ -76,7 +75,7 @@ export const Popular = () => {
 
       const newIndex = visibleIndex === popularProducts.length - 1 ? 0 : visibleIndex + 1;
       scrollTo(newIndex);
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(autoScrollInterval);
   }, [visibleIndex, popularProducts.length]);
@@ -85,35 +84,42 @@ export const Popular = () => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
-      dispatch(createPopular(POPULAR_PRODUCT));
-    }, 3000);
-  }, [dispatch]);
+    }, 500);
+  }, []);
+
+  const handleClose = () => {
+    navigation.goBack();
+  };
 
   return (
-    <View style={styles.popular}>
-      <Text>Popular</Text>
-      <View style={styles.popularCarousel}>
-        <FlatList
-          ref={ref}
-          style={styles.list}
-          horizontal
-          pagingEnabled
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-          data={popularProducts}
-          onEndReached={() => dispatch(createPopular(NEW_POPULAR_PRODUCTS))}
-          renderItem={renderItem}
-          onViewableItemsChanged={onViewableItemsChanged}
-        />
+    <View style={styles.popularContainer}>
+      <View style={styles.popular}>
+        {/*<Text>Popular</Text>*/}
+        <Pressable style={styles.closeBtn} onPress={handleClose}>
+          {getIcon(EnumIcons.close, EnumColors.gray)}
+        </Pressable>
+        <View style={styles.popularCarousel}>
+          <FlatList
+            ref={ref}
+            style={styles.list}
+            horizontal
+            pagingEnabled
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+            data={popularProducts}
+            renderItem={renderItem}
+            onViewableItemsChanged={onViewableItemsChanged}
+          />
 
-        <View style={styles.pagination}>
-          {popularProducts.map((_, index) => {
-            return (
-              <View
-                key={index}
-                style={[styles.paginationItem, visibleIndex === index ? styles.paginationItemActive : null]}
-              />
-            );
-          })}
+          <View style={styles.pagination}>
+            {popularProducts.map((_, index) => {
+              return (
+                <View
+                  key={index}
+                  style={[styles.paginationItem, visibleIndex === index ? styles.paginationItemActive : null]}
+                />
+              );
+            })}
+          </View>
         </View>
       </View>
     </View>
@@ -121,10 +127,24 @@ export const Popular = () => {
 };
 
 const styles = StyleSheet.create({
+  popularContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    paddingHorizontal: 14,
+    paddingVertical: 14,
+  },
   popular: {
     gap: 10,
     width: '100%',
     paddingHorizontal: 14,
+    paddingTop: 40,
+    paddingBottom: 20,
+    backgroundColor: EnumColors.white,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: EnumColors.gray,
   },
   popularCarousel: {
     display: 'flex',
@@ -176,5 +196,15 @@ const styles = StyleSheet.create({
   },
   paginationItemActive: {
     backgroundColor: EnumColors.blue,
+  },
+  closeBtn: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 30,
+    height: 30,
   },
 });

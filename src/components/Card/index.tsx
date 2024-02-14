@@ -4,43 +4,51 @@ import { getIcon } from 'app/helpers/getIcon.tsx';
 import { EnumColors, EnumIcons, ICard } from 'app/types';
 import { FC } from 'react';
 import { ButtonIcon } from 'app/elements';
+import { useNavigation } from '@react-navigation/native';
 
 export const Card: FC<ICard> = props => {
   const { title, caption, price, oldPrice, img, isNew } = props;
+  const navigation = useNavigation();
   const onPress = () => {
     console.log('on press');
   };
 
+  const handlePress = () => {
+    navigation.navigate('Details', {
+      ...props,
+    });
+  };
+
   return (
     <View style={styles.card}>
-      <View style={styles.imageContainer}>
-        <Pressable style={styles.like}>{getIcon(EnumIcons.like, EnumColors.gray)}</Pressable>
-        <Image style={styles.image} source={img} />
-        {isNew && <Text style={styles.label}>New</Text>}
-      </View>
-      <View style={styles.info}>
-        <Text style={styles.title} numberOfLines={2}>
-          {title}
-        </Text>
-        <Text style={styles.caption} numberOfLines={1}>
-          {caption}
-        </Text>
-        <View style={styles.priceContainer}>
-          <Text style={styles.price}>${price}</Text>
-          {oldPrice && <Text style={styles.oldPrice}>${oldPrice}</Text>}
+      <Pressable onPress={handlePress} style={styles.cardLink}>
+        <View style={styles.imageContainer}>
+          <Pressable style={styles.like}>{getIcon(EnumIcons.like, EnumColors.gray)}</Pressable>
+          <Image style={styles.image} source={img} />
+          {isNew && <Text style={styles.label}>New</Text>}
         </View>
-        <View style={styles.cardBtn}>
-          <ButtonIcon iconName="bag" onPress={onPress} circle />
+        <View style={styles.info}>
+          <Text style={styles.title} numberOfLines={2}>
+            {title}
+          </Text>
+          <Text style={styles.caption} numberOfLines={1}>
+            {caption}
+          </Text>
+          <View style={styles.priceContainer}>
+            <Text style={styles.price}>${price}</Text>
+            {oldPrice && <Text style={styles.oldPrice}>${oldPrice}</Text>}
+          </View>
+          <View style={styles.cardBtn}>
+            <ButtonIcon iconName="bag" onPress={onPress} circle />
+          </View>
         </View>
-      </View>
+      </Pressable>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    display: 'flex',
-    flexDirection: 'row',
     backgroundColor: EnumColors.white,
     borderRadius: 16,
     shadowColor: EnumColors.gray,
@@ -52,6 +60,10 @@ const styles = StyleSheet.create({
     shadowRadius: 5.46,
     elevation: 4,
     overflow: 'hidden',
+  },
+  cardLink: {
+    display: 'flex',
+    flexDirection: 'row',
   },
   imageContainer: {
     position: 'relative',
