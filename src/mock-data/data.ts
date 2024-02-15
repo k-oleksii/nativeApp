@@ -2,7 +2,7 @@ import { IMAGES } from 'app/constants';
 
 export const data = [
   {
-    id: '01',
+    id: '1',
     isNew: true,
     caption: "Men's Knit Sweater",
     title: 'Nike Sportswear Tech Pack',
@@ -12,7 +12,7 @@ export const data = [
     info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
-    id: '02',
+    id: '2',
     isNew: false,
     caption: "Men's Casual Shirt",
     title: 'Slim Fit Oxford Button-Down Shirt',
@@ -21,7 +21,7 @@ export const data = [
     info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
-    id: '04',
+    id: '3',
     isNew: false,
     caption: "Men's Hooded Jacket",
     title: 'Water-Resistant Windbreaker',
@@ -31,7 +31,7 @@ export const data = [
     info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
-    id: '03',
+    id: '4',
     isNew: true,
     caption: "Men's Denim Jeans",
     title: 'Slim Fit Stretch Denim',
@@ -41,7 +41,7 @@ export const data = [
     info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
-    id: '05',
+    id: '5',
     isNew: true,
     caption: "Men's Leather Shoes",
     title: 'Classic Brogue Oxford',
@@ -50,7 +50,7 @@ export const data = [
     info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
-    id: '06',
+    id: '6',
     isNew: false,
     caption: "Men's Sport Shorts",
     title: 'Quick-Dry Performance Shorts',
@@ -60,7 +60,7 @@ export const data = [
     info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
-    id: '07',
+    id: '7',
     isNew: true,
     caption: "Men's Polo Shirt",
     title: 'Classic Pique Polo',
@@ -70,7 +70,7 @@ export const data = [
     info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
-    id: '08',
+    id: '8',
     isNew: false,
     caption: "Men's Winter Coat",
     title: 'Insulated Parka with Faux Fur Hood',
@@ -79,7 +79,7 @@ export const data = [
     info: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
-    id: '09',
+    id: '9',
     isNew: true,
     caption: "Men's Track Pants",
     title: 'Slim Fit Joggers',
