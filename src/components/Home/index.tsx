@@ -8,7 +8,7 @@ import { EnumColors, EnumIcons, ICard } from 'app/types';
 
 import { getIcon } from 'app/helpers/getIcon.tsx';
 
-import { useSortAndFilterProducts } from 'app/hooks';
+import { useOrientation, useSortAndFilterProducts } from 'app/hooks';
 import { useNavigation } from '@react-navigation/native';
 
 const renderCard: ListRenderItem<ICard> = ({ item }) => {
@@ -28,6 +28,8 @@ export const Home = () => {
   const navigation = useNavigation();
   const products = useSortAndFilterProducts(search, isFilterNewOption);
 
+  const orientation = useOrientation();
+  const isHorizontal = orientation === 'landscape';
   const handleSearch = (text: string) => {
     setSearch(text);
   };
@@ -37,6 +39,7 @@ export const Home = () => {
   };
 
   const toggleWishlist = () => {
+    // @ts-ignore
     navigation.navigate('Popular');
   };
 
@@ -71,7 +74,7 @@ export const Home = () => {
       <View style={styles.filter}>
         <ButtonText text="Filter" iconName="filter" onPress={toggleFilter} />
       </View>
-      <FlatList style={styles.cards} data={products} renderItem={renderCard} />
+      <FlatList horizontal={isHorizontal} style={styles.cards} data={products} renderItem={renderCard} />
 
       {isWishlistModal && (
         <Modal modalVisible={isWishlistModal} toggleModal={toggleWishlist}>
