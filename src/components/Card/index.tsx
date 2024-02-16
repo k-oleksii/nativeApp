@@ -14,6 +14,7 @@ export const Card: FC<ICard> = props => {
   };
 
   const handlePress = () => {
+    // @ts-ignore
     navigation.navigate('Details', {
       ...props,
     });

@@ -14,9 +14,12 @@ import {
 } from 'react-native';
 import { EnumColors, EnumIcons } from 'app/types';
 
-import { useLoadPopularProducts } from 'app/hooks';
+import { useLoadPopularProducts, useRefresh } from 'app/hooks';
 import { getIcon } from 'app/helpers/getIcon.tsx';
 import { useNavigation } from '@react-navigation/native';
+import { createPopular } from 'app/lib/redux/slice';
+import { NEW_POPULAR_PRODUCTS } from 'app/constants';
+import { useDispatch } from 'react-redux';
 
 interface IPopular {
   img: ImageSourcePropType;
@@ -50,9 +53,17 @@ const onShare = async ({ link, name }: { link: string; name: string }) => {
 export const Popular = () => {
   const ref = useRef<FlatList>(null);
   const [visibleIndex, setVisibleIndex] = useState<number | null>(null);
-  const [refreshing, setRefreshing] = React.useState(false);
   const popularProducts = useLoadPopularProducts();
   const navigation = useNavigation();
+  // @ts-ignore
+
+  const dispatch = useDispatch();
+
+  const dispatchAction = useCallback(() => {
+    dispatch(createPopular(NEW_POPULAR_PRODUCTS));
+  }, [dispatch]);
+
+  const { isRefreshing, onRefresh } = useRefresh(dispatchAction);
 
   const onViewableItemsChanged = useCallback(({ viewableItems }: { viewableItems: ViewToken[] }) => {
     if (viewableItems.length > 0) {
@@ -80,13 +91,6 @@ export const Popular = () => {
     return () => clearInterval(autoScrollInterval);
   }, [visibleIndex, popularProducts.length]);
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 500);
-  }, []);
-
   const handleClose = () => {
     navigation.goBack();
   };
@@ -104,7 +108,7 @@ export const Popular = () => {
             style={styles.list}
             horizontal
             pagingEnabled
-            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+            refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
             data={popularProducts}
             renderItem={renderItem}
             onViewableItemsChanged={onViewableItemsChanged}

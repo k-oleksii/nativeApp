@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import { FlatList, ListRenderItem, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, Keyboard, ListRenderItem, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Card } from 'app/components/Card';
 import { ButtonText, ButtonIcon, Modal } from 'app/elements';
 
@@ -8,7 +8,7 @@ import { EnumColors, EnumIcons, ICard } from 'app/types';
 
 import { getIcon } from 'app/helpers/getIcon.tsx';
 
-import { useSortAndFilterProducts } from 'app/hooks';
+import { useKeyboard, useOrientation, useSortAndFilterProducts } from 'app/hooks';
 import { useNavigation } from '@react-navigation/native';
 
 const renderCard: ListRenderItem<ICard> = ({ item }) => {
@@ -27,7 +27,10 @@ export const Home = () => {
   const [isFilterNewOption, setFilterNewOption] = useState(false);
   const navigation = useNavigation();
   const products = useSortAndFilterProducts(search, isFilterNewOption);
+  const keyboardOpen = useKeyboard();
 
+  const orientation = useOrientation();
+  const isHorizontal = orientation === 'landscape';
   const handleSearch = (text: string) => {
     setSearch(text);
   };
@@ -37,11 +40,22 @@ export const Home = () => {
   };
 
   const toggleWishlist = () => {
+    // @ts-ignore
     navigation.navigate('Popular');
   };
 
   const toggleFilter = () => {
     setFilterModal(!isFilterModal);
+  };
+
+  const handleButtonClick = () => {
+    // Если клавиатура открыта, скрываем её
+    if (keyboardOpen) {
+      Keyboard.dismiss();
+    } else {
+      // Если клавиатура закрыта, фокусируемся на текстовом поле, чтобы открыть клавиатуру
+      console.log('closed');
+    }
   };
 
   return (
@@ -71,7 +85,7 @@ export const Home = () => {
       <View style={styles.filter}>
         <ButtonText text="Filter" iconName="filter" onPress={toggleFilter} />
       </View>
-      <FlatList style={styles.cards} data={products} renderItem={renderCard} />
+      <FlatList horizontal={isHorizontal} style={styles.cards} data={products} renderItem={renderCard} />
 
       {isWishlistModal && (
         <Modal modalVisible={isWishlistModal} toggleModal={toggleWishlist}>
@@ -99,7 +113,13 @@ export const Home = () => {
           />
         </Modal>
       )}
-
+      {keyboardOpen && (
+        <View style={styles.keyboardBtnContainer}>
+          <Pressable onPress={handleButtonClick} style={styles.keyboardBtn}>
+            <Text style={styles.keyboardBtnText}>Close keyboard</Text>
+          </Pressable>
+        </View>
+      )}
       <Text>Footer</Text>
     </View>
   );
@@ -170,5 +190,30 @@ const styles = StyleSheet.create({
   item: {
     paddingHorizontal: 14,
     marginVertical: 10,
+  },
+  keyboardBtnContainer: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  keyboardBtn: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    backgroundColor: EnumColors.black,
+    width: 150,
+    height: 50,
+    borderRadius: 8,
+  },
+  keyboardBtnText: {
+    fontSize: 16,
+    color: EnumColors.white,
   },
 });

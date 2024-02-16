@@ -1,26 +1,30 @@
 import React, { FC } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { EnumColors, ICard } from 'app/types';
+import { Comments } from 'app/components/Comments';
 
 export const CardInfo: FC<ICard> = props => {
-  const { title, caption, price, oldPrice, img, info } = props;
+  const { title, caption, price, oldPrice, img, info, id } = props;
 
   return (
-    <View style={styles.product}>
-      <View style={styles.productImgWrap}>
-        <Image source={img} style={styles.productImg} />
-      </View>
-
-      <View style={styles.productInfo}>
-        <Text>{title}</Text>
-        <Text>{caption}</Text>
-        <View style={styles.productPriceContainer}>
-          <Text style={styles.productPrice}>${price}</Text>
-          {oldPrice && <Text style={styles.oldProductPrice}>${oldPrice}</Text>}
+    <ScrollView>
+      <View style={styles.product}>
+        <View style={styles.productImgWrap}>
+          <Image source={img} style={styles.productImg} />
         </View>
-        <Text>{info}</Text>
+
+        <View style={styles.productInfo}>
+          <Text>{title}</Text>
+          <Text>{caption}</Text>
+          <View style={styles.productPriceContainer}>
+            <Text style={styles.productPrice}>${price}</Text>
+            {oldPrice && <Text style={styles.oldProductPrice}>${oldPrice}</Text>}
+          </View>
+          <Text>{info}</Text>
+        </View>
+        <Comments id={id} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
