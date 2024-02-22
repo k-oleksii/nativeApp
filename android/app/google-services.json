@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "496389506827",
+    "project_id": "trendflairapp",
+    "storage_bucket": "trendflairapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496389506827:android:aa627eecd9572687ae840e",
+        "android_client_info": {
+          "package_name": "com.trend.flair"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRaLXoDbQn8DI1p21R9wltbGXLmBlBUgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
