@@ -45,3 +45,8 @@ export interface IPopular {
 export interface IPopulars {
   data: IPopular[];
 }
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
